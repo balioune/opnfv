@@ -1,0 +1,39 @@
+--- /etc/keystone/keystone.conf.old	2016-01-08 17:02:47.000000000 +0000
++++ /etc/keystone/keystone.conf	2016-03-09 09:35:47.284385457 +0000
+@@ -9,7 +9,7 @@
+ # production (highly recommended), remove AdminTokenAuthMiddleware from your
+ # paste application pipelines (for example, in keystone-paste.ini). (string
+ # value)
+-#admin_token = ADMIN
++admin_token = password
+ 
+ # The base public endpoint URL for Keystone that is advertised to clients
+ # (NOTE: this does NOT affect how Keystone listens for connections). Defaults
+@@ -104,7 +104,7 @@
+ # (boolean value)
+ # This option is deprecated for removal.
+ # Its value may be silently ignored in the future.
+-#verbose = true
++verbose = true
+ 
+ # The name of a logging configuration file. This file is appended to any
+ # existing logging configuration files. For details about logging configuration
+@@ -130,7 +130,7 @@
+ # (Optional) The base directory used for relative --log-file paths. (string
+ # value)
+ # Deprecated group/name - [DEFAULT]/logdir
+-#log_dir = <None>
++log_dir = /var/log/keystone/
+ log_dir = /var/log/keystone
+ 
+ # Use syslog for logging. Existing syslog format is DEPRECATED and will be
+@@ -494,8 +494,7 @@
+ # Deprecated group/name - [DATABASE]/sql_connection
+ # Deprecated group/name - [sql]/connection
+ #connection = <None>
+-connection = sqlite:////var/lib/keystone/keystone.db
+-
++connection = mysql://keystone:password@localhost/keystonedb
+ # The SQLAlchemy connection string to use to connect to the slave database.
+ # (string value)
+ #slave_connection = <None>

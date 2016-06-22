@@ -1,0 +1,83 @@
+--- /etc/glance/glance-registry.conf.old	2016-01-07 19:52:55.000000000 +0000
++++ /etc/glance/glance-registry.conf	2016-03-10 16:47:37.484256413 +0000
+@@ -185,7 +185,7 @@
+ # default. (boolean value)
+ # This option is deprecated for removal.
+ # Its value may be silently ignored in the future.
+-#verbose = true
++verbose = true
+ 
+ # The name of a logging configuration file. This file is appended to
+ # any existing logging configuration files. For details about logging
+@@ -313,7 +313,7 @@
+ 
+ # The Drivers(s) to handle sending notifications. Possible values are
+ # messaging, messagingv2, routing, log, test, noop (multi valued)
+-#notification_driver =
++notification_driver = noop
+ 
+ # AMQP topic used for OpenStack notifications. (list value)
+ # Deprecated group/name - [rpc_notifier2]/topics
+@@ -361,7 +361,7 @@
+ # Deprecated group/name - [DEFAULT]/sql_connection
+ # Deprecated group/name - [DATABASE]/sql_connection
+ # Deprecated group/name - [sql]/connection
+-#connection = <None>
++connection = mysql+pymysql://glance:password@ops-mono-node/glancedb
+ 
+ # The SQLAlchemy connection string to use to connect to the slave
+ # database. (string value)
+@@ -767,7 +767,7 @@
+ #
+ 
+ # Complete public Identity API endpoint. (string value)
+-#auth_uri = <None>
++auth_uri = http://ops-mono-node:5000
+ 
+ # API version of the admin Identity API endpoint. (string value)
+ #auth_version = <None>
+@@ -913,7 +913,8 @@
+ # Complete admin Identity API endpoint. This should specify the
+ # unversioned root endpoint e.g. https://localhost:35357/ (string
+ # value)
+-#identity_uri = <None>
++#identity_uri = http://ops-mono-node:35357/
++auth_url = http://ops-mono-node:35357
+ 
+ # This option is deprecated and may be removed in a future release.
+ # Single shared secret with the Keystone configuration used for
+@@ -921,16 +922,21 @@
+ # normal authentication process. This option should not be used, use
+ # `admin_user` and `admin_password` instead. (string value)
+ #admin_token = <None>
++auth_plugin = password
++#project_domain_id = default
++#user_domain_id = default
+ 
+ # Service username. (string value)
+-#admin_user = <None>
++#admin_user = glance
++username = glance
+ 
+ # Service user password. (string value)
+-#admin_password = <None>
++#admin_password = password
++password = password
+ 
+ # Service tenant name. (string value)
+-#admin_tenant_name = admin
+-
++#admin_tenant_name = service
++project_name = service
+ 
+ [matchmaker_redis]
+ 
+@@ -1246,7 +1252,7 @@
+ # service name removed. For example, if your paste section name is
+ # [pipeline:glance-api-keystone] use the value "keystone" (string
+ # value)
+-#flavor = <None>
++flavor = keystone
+ 
+ # Name of the paste configuration file. (string value)
+ #config_file = <None>

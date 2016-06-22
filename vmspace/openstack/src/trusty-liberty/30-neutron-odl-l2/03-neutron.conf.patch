@@ -1,0 +1,29 @@
+--- /etc/neutron/neutron.conf.old	2016-05-04 09:51:35.664883717 +0000
++++ /etc/neutron/neutron.conf	2016-05-04 10:03:21.544852111 +0000
+@@ -74,7 +74,7 @@
+ # with previous versions, the class name of a plugin can be specified instead
+ # of its entrypoint name.
+ #
+-service_plugins =
++service_plugins = router
+ # Example: service_plugins = router,firewall,lbaas,vpnaas,metering,qos
+ 
+ # Paste configuration file
+@@ -129,7 +129,7 @@
+ # Enable or disable overlapping IPs for subnets
+ # Attention: the following parameter MUST be set to False if Neutron is
+ # being used in conjunction with nova security groups
+-# allow_overlapping_ips = False
++allow_overlapping_ips = True
+ # Ensure that configured gateway is on subnet. For IPv6, validate only if
+ # gateway is not a link local address. Deprecated, to be removed during the
+ # K release, at which point the check will be mandatory.
+@@ -724,6 +724,8 @@
+ project_name = service
+ username = neutron
+ password = password
++project_domain_id = default
++user_domain_id = default
+ 
+ [database]
+ # This line MUST be changed to actually run the plugin.

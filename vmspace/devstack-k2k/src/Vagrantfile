@@ -1,0 +1,104 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # All Vagrant configuration is done here. The most common configuration
+  # options are documented and commented below. For a complete reference,
+  # please see the online documentation at vagrantup.com.
+
+  # Every Vagrant virtual environment requires a box to build off of.
+  config.vm.box = "ubuntu/trusty64"
+
+  # The url from where the 'config.vm.box' box will be fetched if it
+  # doesn't already exist on the user's system.
+  # config.vm.box_url = "http://domain.com/path/to/above.box"
+
+  # Create a forwarded port mapping which allows access to a specific port
+  # within the machine from a port on the host machine. In the example below,
+  # accessing "localhost:8080" will access port 80 on the guest machine.
+  #config.vm.network :forwarded_port, guest: 80, host: 5073
+  #config.vm.network :forwarded_port, guest: 5000, host: 5074
+  #config.vm.network :forwarded_port, guest: 35357, host: 5075
+
+  # Create a private network, which allows host-only access to the machine
+  # using a specific IP.
+  config.vm.define "master" do |master|
+    #master.vm.box = "master"
+    master.vm.network :private_network, ip: "192.168.22.10", virtualbox__intnet: "federation"
+    master.vm.provider :virtualbox do |vb|
+         vb.customize ["modifyvm", :id, "--memory", "4000"]
+    end
+    master.vm.synced_folder "../../opnfv-moon/keystone-moon/", "/opt/stack/keystone-moon"
+    master.vm.synced_folder "../../opnfv-moon/moonclient/", "/opt/stack/moonclient"
+    master.vm.synced_folder "../../opnfv-moon/keystonemiddleware-moon/", "/opt/stack/keystonemiddleware-moon"
+    master.vm.synced_folder "../../github-moon/moonwebview/", "/opt/stack/moonwebview"
+    master.vm.network :forwarded_port, guest: 80, host: 6073
+    master.vm.network :forwarded_port, guest: 5000, host: 6074
+    master.vm.network :forwarded_port, guest: 35357, host: 6075
+    master.vm.provision "shell",
+        path: "provision_master.sh"
+  end
+  
+  config.vm.define "devstack1" do |devstack1|
+    #devstack1.vm.box = "devstack1"
+    devstack1.vm.network :private_network, ip: "192.168.22.20", virtualbox__intnet: "federation"
+    devstack1.vm.provider :virtualbox do |vb|
+         vb.customize ["modifyvm", :id, "--memory", "4000"]
+    end
+    devstack1.vm.network :forwarded_port, guest: 80, host: 6083
+    devstack1.vm.network :forwarded_port, guest: 5000, host: 6084
+    devstack1.vm.network :forwarded_port, guest: 35357, host: 6085
+    devstack1.vm.network :forwarded_port, guest: 22, host: 22221
+    devstack1.vm.synced_folder "../../opnfv-moon/keystone-moon/", "/opt/stack/keystone-moon"
+    devstack1.vm.synced_folder "../../opnfv-moon/moonclient/", "/opt/stack/moonclient"
+    devstack1.vm.synced_folder "../../opnfv-moon/keystonemiddleware-moon/", "/opt/stack/keystonemiddleware-moon"
+    devstack1.vm.synced_folder "../../github-moon/moonwebview/", "/opt/stack/moonwebview"
+    devstack1.vm.provision "shell",
+        path: "provision_devstack1.sh"
+  end
+
+  #config.vm.define "devstack2" do |devstack2|
+  #  #devstack2.vm.box = "devstack2"
+  #  devstack2.vm.network :private_network, ip: "192.168.22.30", virtualbox__intnet: "federation"
+  #  devstack2.vm.provider :virtualbox do |vb|
+  #       vb.customize ["modifyvm", :id, "--memory", "4000"]
+  #  end
+  #  devstack2.vm.network :forwarded_port, guest: 80, host: 6093
+  #  devstack2.vm.network :forwarded_port, guest: 5000, host: 6094
+  #  devstack2.vm.network :forwarded_port, guest: 35357, host: 6095
+  #  devstack2.vm.synced_folder "../../opnfv-moon/keystonemiddleware-moon/", "/opt/stack/keystonemiddleware-moon"
+  #  devstack2.vm.provision "shell",
+  #      path: "provision_devstack2.sh"
+  #end
+  
+
+  # Create a public network, which generally matched to bridged network.
+  # Bridged networks make the machine appear as another physical device on
+  # your network.
+  config.vm.network :public_network
+
+  # If true, then any SSH connections made will enable agent forwarding.
+  # Default value: false
+  # config.ssh.forward_agent = true
+
+  # Share an additional folder to the guest VM. The first argument is
+  # the path on the host to the actual folder. The second argument is
+  # the path on the guest to mount the folder. And the optional third
+  # argument is a set of non-required options.
+
+  # Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  # Example for VirtualBox:
+  #
+  # config.vm.provider :virtualbox do |vb|
+  #   # Don't boot with headless mode
+  #   vb.gui = true
+  #
+  #   # Use VBoxManage to customize the VM. For example to change memory:
+  #   vb.customize ["modifyvm", :id, "--memory", "4000"]
+  # end
+
+end

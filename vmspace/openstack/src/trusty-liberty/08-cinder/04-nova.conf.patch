@@ -1,0 +1,9 @@
+--- /etc/nova/nova.conf.old	2016-04-06 12:07:48.502818738 +0000
++++ /etc/nova/nova.conf	2016-04-06 12:04:21.951604355 +0000
+@@ -57,3 +57,6 @@
+ password = password
+ service_metadata_proxy = True
+ metadata_proxy_shared_secret = password
++
++[cinder]
++os_region_name = Orange

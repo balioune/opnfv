@@ -1,0 +1,39 @@
+--- /etc/keystone/keystone.conf.old     2015-09-08 15:22:31.804752759 +0000
++++ /etc/keystone/keystone.conf 2015-09-08 15:31:22.340726489 +0000
+@@ -10,7 +10,7 @@
+ # recommended), remove AdminTokenAuthMiddleware from your
+ # paste application pipelines (for example, in keystone-
+ # paste.ini). (string value)
+-#admin_token=ADMIN
++admin_token=password
+ 
+ # The IP Address of the network interface to for the public
+ # service to listen on. (string value)
+@@ -382,7 +382,7 @@
+ 
+ # Print more verbose output (set logging level to INFO instead
+ # of default WARNING level). (boolean value)
+-#verbose=false
++verbose=True
+ 
+ # Log output to standard error (boolean value)
+ #use_stderr=true
+@@ -447,8 +447,7 @@
+ # (Optional) The base directory used for relative --log-file
+ # paths (string value)
+ # Deprecated group/name - [DEFAULT]/logdir
+-#log_dir=<None>
+-
++log_dir=/var/log/keystone/
+ # Use syslog for logging. Existing syslog format is DEPRECATED
+ # during I, and then will be changed in J to honor RFC5424
+ # (boolean value)
+@@ -623,7 +622,7 @@
+ # Deprecated group/name - [DATABASE]/sql_connection
+ # Deprecated group/name - [sql]/connection
+ #connection=<None>
+-connection = sqlite:////var/lib/keystone/keystone.db
++connection = mysql://keystone:password@localhost/keystonedb 
+ 
+ # The SQL mode to be used for MySQL sessions. This option,
+ # including the default, overrides any server-set SQL mode. To

@@ -1,0 +1,11 @@
+--- /etc/lvm/lvm.conf.old	2013-12-13 10:02:14.000000000 +0000
++++ /etc/lvm/lvm.conf	2016-04-05 13:45:42.045906021 +0000
+@@ -65,7 +65,7 @@
+ 
+ 
+     # By default we accept every block device:
+-    filter = [ "a/.*/" ]
++    filter = [ "a/sdb/", "r/.*/"]
+ 
+     # Exclude the cdrom drive
+     # filter = [ "r|/dev/cdrom|" ]

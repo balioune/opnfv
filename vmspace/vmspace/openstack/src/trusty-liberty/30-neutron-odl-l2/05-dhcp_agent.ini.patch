@@ -1,0 +1,21 @@
+--- /etc/neutron/dhcp_agent.ini.odl	2016-05-24 09:13:15.188050825 +0000
++++ /etc/neutron/dhcp_agent.ini	2016-05-24 09:14:32.190534659 +0000
+@@ -10,7 +10,8 @@
+ 
+ # The DHCP agent requires an interface driver be set. Choose the one that best
+ # matches your plugin.
+-interface_driver = neutron.agent.linux.interface.BridgeInterfaceDriver
++dhcp_agent_manager = neutron.agent.dhcp_agent.DhcpAgentWithStateReport
++interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
+ 
+ # Example of interface_driver option for OVS based plugins(OVS, Ryu, NEC, NVP,
+ # BigSwitch/Floodlight)
+@@ -29,7 +30,7 @@
+ 
+ # The agent can use other DHCP drivers.  Dnsmasq is the simplest and requires
+ # no additional setup of the DHCP server.
+-dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
++#dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
+ 
+ # Allow overlapping IP (Must have kernel build with CONFIG_NET_NS=y and
+ # iproute2 package that supports namespaces). This option is deprecated and

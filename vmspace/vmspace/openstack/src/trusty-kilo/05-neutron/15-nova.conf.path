@@ -1,0 +1,24 @@
+--- /etc/nova/nova.conf.old	2015-09-09 13:23:32.410521061 +0000
++++ /etc/nova/nova.conf	2015-09-09 13:24:29.158518251 +0000
+@@ -14,7 +14,20 @@
+ api_paste_config=/etc/nova/api-paste.ini
+ volumes_path=/var/lib/nova/volumes
+ enabled_apis=ec2,osapi_compute,metadata
+-
++metadata-listen = 192.168.33.30
++metadata_listen_port = 8775
++service_neutron_metadata_proxy = true
++neutron_metadata_proxy_shared_secret = password
++network_api_class = nova.network.neutronv2.api.API
++neutron_url = http://ops-mono-node:9696
++neutron_auth_strategy = keystone
++neutron_admin_tenant_name = service
++neutron_admin_username = neutron
++neutron_admin_password = password 
++neutron_admin_auth_url = http://ops-mono-node:35357/v2.0
++linuxnet_interface_driver = nova.network.linux_net.LinuxOVSInterfaceDriver
++firewall_driver = nova.virt.firewall.NoopFirewallDriver
++security_group_api = neutron
+ glance_host=ops-mono-node
+ auth_strategy = keystone
+ my_ip = 192.168.33.30

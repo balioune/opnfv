@@ -1,0 +1,20 @@
+--- /etc/neutron/dhcp_agent.ini.bak	2016-06-10 11:02:18.206296188 -0400
++++ /etc/neutron/dhcp_agent.ini	2016-06-10 11:02:56.621492766 -0400
+@@ -20,7 +20,7 @@
+ #network_device_mtu = <None>
+ 
+ # The driver used to manage the virtual interface. (string value)
+-interface_driver = neutron.agent.linux.interface.BridgeInterfaceDriver
++interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
+ 
+ # Timeout in seconds for ovs-vsctl commands. If the timeout expires, ovs
+ # commands will fail with ALARMCLOCK error. (integer value)
+@@ -36,7 +36,7 @@
+ #resync_interval = 5
+ 
+ # The driver used to manage the DHCP server. (string value)
+-dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
++#dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
+ 
+ # The DHCP server can assist with providing metadata support on isolated
+ # networks. Setting this value to True will cause the DHCP server to append

@@ -1,0 +1,29 @@
+--- /etc/neutron/dhcp_agent.ini.orig	2016-05-26 05:55:29.563848000 -0400
++++ /etc/neutron/dhcp_agent.ini	2016-05-26 06:00:38.422200000 -0400
+@@ -20,7 +20,7 @@
+ #network_device_mtu = <None>
+ 
+ # The driver used to manage the virtual interface. (string value)
+-#interface_driver = <None>
++interface_driver = neutron.agent.linux.interface.BridgeInterfaceDriver
+ 
+ # Timeout in seconds for ovs-vsctl commands. If the timeout expires, ovs
+ # commands will fail with ALARMCLOCK error. (integer value)
+@@ -36,7 +36,7 @@
+ #resync_interval = 5
+ 
+ # The driver used to manage the DHCP server. (string value)
+-#dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
++dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
+ 
+ # The DHCP server can assist with providing metadata support on isolated
+ # networks. Setting this value to True will cause the DHCP server to append
+@@ -45,7 +45,7 @@
+ # instance must be configured to request host routes via DHCP (Option 121).
+ # This option doesn't have any effect when force_metadata is set to True.
+ # (boolean value)
+-#enable_isolated_metadata = false
++enable_isolated_metadata = true
+ 
+ # In some cases the Neutron router is not present to provide the metadata IP
+ # but the DHCP server can be used to provide this info. Setting this value will

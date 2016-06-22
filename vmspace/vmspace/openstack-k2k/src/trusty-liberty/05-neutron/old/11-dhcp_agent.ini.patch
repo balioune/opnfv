@@ -1,0 +1,11 @@
+--- /etc/neutron/dhcp_agent.ini.old	2016-03-24 10:13:37.270946013 +0000
++++ /etc/neutron/dhcp_agent.ini	2016-03-24 10:15:21.130942119 +0000
+@@ -49,7 +49,7 @@
+ # be activated when the subnet does not contain any router port. The guest
+ # instance must be configured to request host routes via DHCP (Option 121).
+ # This option doesn't have any effect when force_metadata is set to True.
+-# enable_isolated_metadata = False
++enable_isolated_metadata = True
+ 
+ # Allows for serving metadata requests coming from a dedicated metadata
+ # access network whose cidr is 169.254.169.254/16 (or larger prefix), and

@@ -1,0 +1,20 @@
+--- /etc/neutron/dhcp_agent.ini.old	2016-05-04 08:44:15.200707832 +0000
++++ /etc/neutron/dhcp_agent.ini	2016-05-04 08:46:02.448703029 +0000
+@@ -10,7 +10,7 @@
+ 
+ # The DHCP agent requires an interface driver be set. Choose the one that best
+ # matches your plugin.
+-interface_driver = neutron.agent.linux.interface.BridgeInterfaceDriver
++interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
+ 
+ # Example of interface_driver option for OVS based plugins(OVS, Ryu, NEC, NVP,
+ # BigSwitch/Floodlight)
+@@ -100,7 +100,7 @@
+ # This should not be a problem any more.  Refer to bug:
+ # https://bugs.launchpad.net/neutron/+bug/1418079
+ # This option is deprecated and will be removed in the M release
+-# dhcp_delete_namespaces = True
++dhcp_delete_namespaces = True
+ 
+ # Timeout for ovs-vsctl commands.
+ # If the timeout expires, ovs commands will fail with ALARMCLOCK error.

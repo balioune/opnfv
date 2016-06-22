@@ -1,0 +1,25 @@
+--- /etc/nova/nova.conf.old	2016-01-21 18:13:33.000000000 +0000
++++ /etc/nova/nova.conf	2016-03-23 13:39:05.410584727 +0000
+@@ -10,3 +10,22 @@
+ ec2_private_dns_show_ip=True
+ api_paste_config=/etc/nova/api-paste.ini
+ enabled_apis=ec2,osapi_compute,metadata
++
++glance_host=ops-mono-node
++auth_strategy = keystone
++my_ip = 192.168.33.30
++
++[oslo_messaging_rabbit]
++rabbit_host = ops-mono-node
++rabbit_password = password
++
++[database]
++connection = mysql://nova:password@localhost/novadb
++
++[keystone_authtoken]
++auth_uri = http://ops-mono-node:5000
++auth_url = http://ops-mono-node:35357
++auth_plugin = password
++project_name = service
++username = nova
++password = password

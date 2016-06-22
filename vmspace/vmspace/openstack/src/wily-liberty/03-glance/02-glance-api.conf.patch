@@ -1,0 +1,133 @@
+--- /etc/glance/glance-api.conf.old	2016-03-09 12:44:26.108107716 +0000
++++ /etc/glance/glance-api.conf	2016-03-10 16:47:00.913398774 +0000
+@@ -270,7 +270,7 @@
+ # The URL to the keystone service. If "use_user_token" is not in
+ # effect and using keystone auth, then URL of keystone can be
+ # specified. (string value)
+-#auth_url = <None>
++auth_url = http://ops-mono-node:35357
+ 
+ # The strategy to use for authentication. If "use_user_token" is not
+ # in effect, then auth strategy can be specified. (string value)
+@@ -360,7 +360,7 @@
+ # default. (boolean value)
+ # This option is deprecated for removal.
+ # Its value may be silently ignored in the future.
+-#verbose = true
++verbose = true
+ 
+ # The name of a logging configuration file. This file is appended to
+ # any existing logging configuration files. For details about logging
+@@ -488,7 +488,7 @@
+ 
+ # The Drivers(s) to handle sending notifications. Possible values are
+ # messaging, messagingv2, routing, log, test, noop (multi valued)
+-#notification_driver =
++notification_driver = noop
+ 
+ # AMQP topic used for OpenStack notifications. (list value)
+ # Deprecated group/name - [rpc_notifier2]/topics
+@@ -535,11 +535,11 @@
+ # Deprecated group/name - [DEFAULT]/sql_connection
+ # Deprecated group/name - [DATABASE]/sql_connection
+ # Deprecated group/name - [sql]/connection
+-#connection = <None>
++connection = mysql+pymysql://glance:password@ops-mono-node/glancedb
+ 
+ # The SQLAlchemy connection string to use to connect to the slave
+ # database. (string value)
+-#slave_connection = <None>
++#slave_connection = mysql://glance:password@ops-mono-node/glancedb
+ 
+ # The SQL mode to be used for MySQL sessions. This option, including
+ # the default, overrides any server-set SQL mode. To use whatever SQL
+@@ -634,7 +634,7 @@
+ #
+ 
+ # List of stores enabled (list value)
+-#stores = file,http
++stores = file
+ 
+ # Default scheme to use to store image data. The scheme must be
+ # registered by one of the stores defined by the 'stores' config
+@@ -702,7 +702,7 @@
+ 
+ # List of directories and its priorities to which the Filesystem
+ # backend store writes images. (multi valued)
+-#filesystem_store_datadirs =
++filesystem_store_datadir = /var/lib/glance/images/
+ 
+ # The path to a file which contains the metadata to be returned with
+ # any location associated with this store.  The file must contain a
+@@ -977,8 +977,7 @@
+ #
+ 
+ # Complete public Identity API endpoint. (string value)
+-#auth_uri = <None>
+-
++auth_uri = http://ops-mono-node:5000
+ # API version of the admin Identity API endpoint. (string value)
+ #auth_version = <None>
+ 
+@@ -1123,7 +1122,8 @@
+ # Complete admin Identity API endpoint. This should specify the
+ # unversioned root endpoint e.g. https://localhost:35357/ (string
+ # value)
+-#identity_uri = <None>
++auth_url = http://ops-mono-node:35357
++#identity_uri = http://ops-mono-node:35357/
+ 
+ # This option is deprecated and may be removed in a future release.
+ # Single shared secret with the Keystone configuration used for
+@@ -1131,15 +1131,20 @@
+ # normal authentication process. This option should not be used, use
+ # `admin_user` and `admin_password` instead. (string value)
+ #admin_token = <None>
+-
++auth_plugin = password
++#project_domain_id = default
++#user_domain_id = default
+ # Service username. (string value)
+-#admin_user = <None>
++#admin_user = glance
++username = glance
+ 
+ # Service user password. (string value)
+-#admin_password = <None>
++#admin_password = password
++password = password
+ 
+ # Service tenant name. (string value)
+-#admin_tenant_name = admin
++#admin_tenant_name = service
++project_name = service
+ 
+ 
+ [matchmaker_redis]
+@@ -1374,7 +1379,7 @@
+ # The RabbitMQ broker address where a single node is used. (string
+ # value)
+ # Deprecated group/name - [DEFAULT]/rabbit_host
+-#rabbit_host = localhost
++rabbit_host = ops-mono-node
+ 
+ # The RabbitMQ broker port where a single node is used. (integer
+ # value)
+@@ -1395,7 +1400,7 @@
+ 
+ # The RabbitMQ password. (string value)
+ # Deprecated group/name - [DEFAULT]/rabbit_password
+-#rabbit_password = guest
++rabbit_password = password
+ 
+ # The RabbitMQ login method. (string value)
+ # Deprecated group/name - [DEFAULT]/rabbit_login_method
+@@ -1474,7 +1479,7 @@
+ # service name removed. For example, if your paste section name is
+ # [pipeline:glance-api-keystone] use the value "keystone" (string
+ # value)
+-#flavor = <None>
++flavor = keystone
+ 
+ # Name of the paste configuration file. (string value)
+ #config_file = <None>

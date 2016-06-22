@@ -1,0 +1,10 @@
+--- /tmp/nova.conf	2016-05-27 05:45:39.910177115 -0400
++++ /etc/nova/nova.conf	2016-05-27 05:45:44.984713115 -0400
+@@ -64,3 +64,7 @@
+ service_metadata_proxy = True
+ metadata_proxy_shared_secret = password
+ connection = mysql+pymysql://neutron:password@localhost/neutrondb
++
++[cinder]
++os_region_name = Orange
++

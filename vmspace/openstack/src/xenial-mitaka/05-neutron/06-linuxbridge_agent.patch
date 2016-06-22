@@ -1,0 +1,44 @@
+--- /etc/neutron/plugins/ml2/linuxbridge_agent.ini.orig	2016-05-26 05:48:49.960145999 -0400
++++ /etc/neutron/plugins/ml2/linuxbridge_agent.ini	2016-05-26 05:51:10.618439999 -0400
+@@ -121,7 +121,7 @@
+ # will be via the port security extension. (boolean value)
+ # This option is deprecated for removal.
+ # Its value may be silently ignored in the future.
+-#prevent_arp_spoofing = true
++prevent_arp_spoofing = true
+ 
+ 
+ [linux_bridge]
+@@ -135,7 +135,7 @@
+ # interfaces to be used for flat and VLAN networks. All physical networks
+ # listed in network_vlan_ranges on the server should have mappings to
+ # appropriate interfaces on each agent. (list value)
+-#physical_interface_mappings =
++physical_interface_mappings = public:eth1
+ 
+ # List of <physical_network>:<physical_bridge> (list value)
+ #bridge_mappings =
+@@ -148,12 +148,12 @@
+ #
+ 
+ # Driver for security groups firewall in the L2 agent (string value)
+-#firewall_driver = <None>
++firewall_driver = neutron.agent.linux.iptables_firewall.IptablesFirewallDriver
+ 
+ # Controls whether the neutron security group API is enabled in the server. It
+ # should be false when using no security groups or using the nova security
+ # group API. (boolean value)
+-#enable_security_group = true
++enable_security_group = true
+ 
+ # Use ipset to speed-up the iptables based security groups. Enabling ipset
+ # support requires that ipset is installed on L2 agent node. (boolean value)
+@@ -168,7 +168,7 @@
+ 
+ # Enable VXLAN on the agent. Can be enabled when agent is managed by ml2 plugin
+ # using linuxbridge mechanism driver (boolean value)
+-#enable_vxlan = true
++enable_vxlan = false
+ 
+ # TTL for vxlan interface protocol packets. (integer value)
+ #ttl = <None>

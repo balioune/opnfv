@@ -1,0 +1,40 @@
+--- /etc/glance/glance-api.conf.old	2016-04-04 12:12:00.201232738 +0000
++++ /etc/glance/glance-api.conf	2016-04-06 13:25:07.715442666 +0000
+@@ -634,7 +634,7 @@
+ #
+
+ # List of stores enabled (list value)
+-#stores = file,http
++stores = file,swift
+
+ # Default scheme to use to store image data. The scheme must be
+ # registered by one of the stores defined by the 'stores' config
+@@ -762,7 +762,7 @@
+
+ # A boolean value that determines if we create the container if it
+ # does not exist. (boolean value)
+-#swift_store_create_container_on_put = false
++swift_store_create_container_on_put = True
+
+ # If set to True, enables multi-tenant storage mode which causes
+ # Glance images to be stored in tenant specific Swift accounts.
+@@ -806,16 +806,16 @@
+ # The address where the Swift authentication service is listening.
+ # (deprecated - use "auth_address" in swift_store_config_file) (string
+ # value)
+-#swift_store_auth_address = <None>
++swift_store_auth_address = http://ops-mono-node:5000/v2.0/
+
+ # The user to authenticate against the Swift authentication service
+ # (deprecated - use "user" in swift_store_config_file) (string value)
+-#swift_store_user = <None>
++swift_store_user = service:glance
+
+ # Auth key for the user authenticating against the Swift
+ # authentication service. (deprecated - use "key" in
+ # swift_store_config_file) (string value)
+-#swift_store_key = <None>
++swift_store_key = password
+
+ # The config file that has the swift account(s)configs. (string value)
+ #swift_store_config_file = <None>

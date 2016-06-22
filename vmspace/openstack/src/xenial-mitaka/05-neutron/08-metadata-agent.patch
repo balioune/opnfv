@@ -1,0 +1,20 @@
+--- /etc/neutron/metadata_agent.ini.orig	2016-05-26 06:01:18.866412000 -0400
++++ /etc/neutron/metadata_agent.ini	2016-05-26 08:28:47.824578756 -0400
+@@ -19,7 +19,7 @@
+ #auth_ca_cert = <None>
+ 
+ # IP address used by Nova metadata server. (string value)
+-#nova_metadata_ip = 127.0.0.1
++nova_metadata_ip = ops-mono-node
+ 
+ # TCP Port used by Nova metadata server. (port value)
+ # Minimum value: 0
+@@ -31,7 +31,7 @@
+ # but it must match here and in the configuration used by the Nova Metadata
+ # Server. NOTE: Nova uses the same config key, but in [neutron] section.
+ # (string value)
+-#metadata_proxy_shared_secret =
++metadata_proxy_shared_secret = password
+ 
+ # Protocol to access nova metadata, http or https (string value)
+ # Allowed values: http, https

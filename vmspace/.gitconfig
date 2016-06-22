@@ -1,0 +1,5 @@
+[http]
+	proxy = http://www-cache-nrs.si.fr.intraorange:3128
+[user]
+	email = alioune.ba@orange.com
+	name = Alioune

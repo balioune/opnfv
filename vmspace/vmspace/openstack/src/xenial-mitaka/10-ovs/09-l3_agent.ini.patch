@@ -1,0 +1,20 @@
+--- /etc/neutron/l3_agent.ini.bak	2016-06-07 06:58:57.974874396 -0400
++++ /etc/neutron/l3_agent.ini	2016-06-07 07:00:43.759740396 -0400
+@@ -21,6 +21,7 @@
+ 
+ # The driver used to manage the virtual interface. (string value)
+ #interface_driver = <None>
++interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
+ 
+ # Timeout in seconds for ovs-vsctl commands. If the timeout expires, ovs
+ # commands will fail with ALARMCLOCK error. (integer value)
+@@ -105,6 +106,9 @@
+ # can be associated with no more than one external network. This option is
+ # deprecated and will be removed in the M release. (string value)
+ #external_network_bridge = br-ex
++external_network_bridge = br-ex
++
++router_delete_namespaces = True
+ 
+ # Seconds between running periodic tasks (integer value)
+ #periodic_interval = 40

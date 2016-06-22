@@ -1,0 +1,29 @@
+--- /etc/neutron/l3_agent.ini.bak	2016-05-18 08:18:35.564304336 +0000
++++ /etc/neutron/l3_agent.ini	2016-05-18 08:19:51.824306119 +0000
+@@ -4,7 +4,7 @@
+ 
+ # L3 requires that an interface driver be set. Choose the one that best
+ # matches your plugin.
+-# interface_driver =
++interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
+ 
+ # Example of interface_driver option for OVS based plugins (OVS, Ryu, NEC)
+ # that supports L3 agent
+@@ -68,7 +68,7 @@
+ # empty value for the linux bridge. when this parameter is set, each L3 agent
+ # can be associated with no more than one external network.
+ # This option is deprecated and will be removed in the M release.
+-# external_network_bridge = br-ex
++external_network_bridge = br-ex
+ 
+ # TCP Port used by Neutron metadata server
+ # metadata_port = 9697
+@@ -103,7 +103,7 @@
+ # This should not be a problem any more.  Refer to bug:
+ # https://bugs.launchpad.net/neutron/+bug/1418079
+ # This option is deprecated and will be removed in the M release
+-# router_delete_namespaces = True
++router_delete_namespaces = True
+ 
+ # Timeout for ovs-vsctl commands.
+ # If the timeout expires, ovs commands will fail with ALARMCLOCK error.

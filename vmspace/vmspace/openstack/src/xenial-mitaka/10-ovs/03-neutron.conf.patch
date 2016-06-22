@@ -1,0 +1,20 @@
+--- /etc/neutron/neutron.conf.bak	2016-06-08 06:44:41.956334742 -0400
++++ /etc/neutron/neutron.conf	2016-06-08 06:47:42.684334742 -0400
+@@ -30,7 +30,7 @@
+ core_plugin = ml2
+ 
+ # The service plugins Neutron will use (list value)
+-#service_plugins =
++service_plugins = router
+ 
+ # The base MAC address Neutron will use for VIFs. The first 3 octets will
+ # remain unchanged. If the 4th octet is not 00, it will also be used. The
+@@ -772,6 +772,8 @@
+ # Complete public Identity API endpoint. (string value)
+ #auth_uri = <None>
+ auth_uri = http://ops-mono-node:5000
++project_domain_id = default
++user_domain_id = default
+ 
+ # API version of the admin Identity API endpoint. (string value)
+ #auth_version = <None>

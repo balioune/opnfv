@@ -1,0 +1,11 @@
+--- /etc/nova/nova.conf.bak	2016-06-10 11:11:20.341208136 -0400
++++ /etc/nova/nova.conf	2016-06-10 11:11:59.640846683 -0400
+@@ -16,7 +16,7 @@
+ #network_api_class = nova.network.neutronv2.api.API
+ use_neutron = true
+ security_group_api = neutron
+-linuxnet_interface_driver = nova.network.linux_net.NeutronLinuxBridgeInterfaceDriver
++linuxnet_interface_driver =
+ firewall_driver = nova.virt.firewall.NoopFirewallDriver
+ 
+ [api_database]

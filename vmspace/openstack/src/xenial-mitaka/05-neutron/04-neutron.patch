@@ -1,0 +1,157 @@
+--- /etc/neutron/neutron.conf.orig	2016-05-26 05:29:38.092500379 -0400
++++ /etc/neutron/neutron.conf	2016-05-26 05:43:31.693091999 -0400
+@@ -24,7 +24,7 @@
+ #api_extensions_path =
+ 
+ # The type of authentication to use (string value)
+-#auth_strategy = keystone
++auth_strategy = keystone
+ 
+ # The core plugin Neutron will use (string value)
+ core_plugin = ml2
+@@ -134,11 +134,11 @@
+ #force_gateway_on_subnet = true
+ 
+ # Send notification to nova when port status changes (boolean value)
+-#notify_nova_on_port_status_changes = true
++notify_nova_on_port_status_changes = true
+ 
+ # Send notification to nova when port data (fixed_ips/floatingip) changes so
+ # nova can update its cache. (boolean value)
+-#notify_nova_on_port_data_changes = true
++notify_nova_on_port_data_changes = true
+ 
+ # Number of seconds between sending events to nova if there are any events to
+ # send. (integer value)
+@@ -686,7 +686,7 @@
+ # Deprecated group/name - [DEFAULT]/sql_connection
+ # Deprecated group/name - [DATABASE]/sql_connection
+ # Deprecated group/name - [sql]/connection
+-connection = sqlite:////var/lib/neutron/neutron.sqlite
++connection = mysql+pymysql://neutron:password@localhost/neutrondb
+ 
+ # The SQLAlchemy connection string to use to connect to the slave database.
+ # (string value)
+@@ -771,6 +771,7 @@
+ 
+ # Complete public Identity API endpoint. (string value)
+ #auth_uri = <None>
++auth_uri = http://ops-mono-node:5000
+ 
+ # API version of the admin Identity API endpoint. (string value)
+ #auth_version = <None>
+@@ -895,20 +896,20 @@
+ 
+ # Host providing the admin Identity API endpoint. Deprecated, use identity_uri.
+ # (string value)
+-#auth_host = 127.0.0.1
++auth_host = ops-mono-node
+ 
+ # Port of the admin Identity API endpoint. Deprecated, use identity_uri.
+ # (integer value)
+-#auth_port = 35357
++auth_port = 35357
+ 
+ # Protocol of the admin Identity API endpoint. Deprecated, use identity_uri.
+ # (string value)
+ # Allowed values: http, https
+-#auth_protocol = https
++auth_protocol = http
+ 
+ # Complete admin Identity API endpoint. This should specify the unversioned
+ # root endpoint e.g. https://localhost:35357/ (string value)
+-#identity_uri = <None>
++identity_uri = http://ops-mono-node:35357/
+ 
+ # This option is deprecated and may be removed in a future release. Single
+ # shared secret with the Keystone configuration used for bootstrapping a
+@@ -918,13 +919,13 @@
+ #admin_token = <None>
+ 
+ # Service username. (string value)
+-#admin_user = <None>
++admin_user = neutron
+ 
+ # Service user password. (string value)
+-#admin_password = <None>
++admin_password = password
+ 
+ # Service tenant name. (string value)
+-#admin_tenant_name = admin
++admin_tenant_name = service
+ 
+ # Authentication type to load (unknown value)
+ # Deprecated group/name - [DEFAULT]/auth_plugin
+@@ -976,7 +977,7 @@
+ 
+ # Name of nova region to use. Useful if keystone manages more than one region.
+ # (string value)
+-#region_name = <None>
++region_name = Orange
+ 
+ # Type of the nova endpoint to use.  This endpoint will be looked up in the
+ # keystone catalog and should be one of public, internal or admin. (string
+@@ -989,11 +990,11 @@
+ #
+ 
+ # Authentication URL (unknown value)
+-#auth_url = <None>
++auth_url = http://ops-mono-node:35357
+ 
+ # Authentication type to load (unknown value)
+ # Deprecated group/name - [DEFAULT]/auth_plugin
+-#auth_type = <None>
++auth_type = password
+ 
+ # PEM encoded Certificate Authority to use when verifying HTTPs connections.
+ # (string value)
+@@ -1025,7 +1026,7 @@
+ #keyfile = <None>
+ 
+ # User's password (unknown value)
+-#password = <None>
++password = password
+ 
+ # Domain ID containing project (unknown value)
+ #project_domain_id = <None>
+@@ -1039,7 +1040,7 @@
+ 
+ # Project name to scope to (unknown value)
+ # Deprecated group/name - [DEFAULT]/tenant-name
+-#project_name = <None>
++project_name = service
+ 
+ # Tenant ID (unknown value)
+ #tenant_id = <None>
+@@ -1064,7 +1065,7 @@
+ 
+ # Username (unknown value)
+ # Deprecated group/name - [DEFAULT]/username
+-#username = <None>
++username = nova
+ 
+ 
+ [oslo_concurrency]
+@@ -1235,7 +1236,7 @@
+ 
+ # The RabbitMQ broker address where a single node is used. (string value)
+ # Deprecated group/name - [DEFAULT]/rabbit_host
+-#rabbit_host = localhost
++rabbit_host = localhost
+ 
+ # The RabbitMQ broker port where a single node is used. (port value)
+ # Minimum value: 0
+@@ -1253,11 +1254,11 @@
+ 
+ # The RabbitMQ userid. (string value)
+ # Deprecated group/name - [DEFAULT]/rabbit_userid
+-#rabbit_userid = guest
++rabbit_userid = openstack
+ 
+ # The RabbitMQ password. (string value)
+ # Deprecated group/name - [DEFAULT]/rabbit_password
+-#rabbit_password = guest
++rabbit_password = password
+ 
+ # The RabbitMQ login method. (string value)
+ # Deprecated group/name - [DEFAULT]/rabbit_login_method

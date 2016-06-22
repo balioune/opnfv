@@ -1,0 +1,52 @@
+--- /etc/glance/glance-registry.conf.old	2016-01-12 13:15:54.000000000 +0000
++++ /etc/glance/glance-registry.conf	2016-04-04 12:17:18.969233026 +0000
+@@ -185,7 +185,7 @@
+ # default. (boolean value)
+ # This option is deprecated for removal.
+ # Its value may be silently ignored in the future.
+-#verbose = true
++verbose = true
+ 
+ # The name of a logging configuration file. This file is appended to
+ # any existing logging configuration files. For details about logging
+@@ -313,7 +313,7 @@
+ 
+ # The Drivers(s) to handle sending notifications. Possible values are
+ # messaging, messagingv2, routing, log, test, noop (multi valued)
+-#notification_driver =
++notification_driver = noop
+ 
+ # AMQP topic used for OpenStack notifications. (list value)
+ # Deprecated group/name - [rpc_notifier2]/topics
+@@ -361,7 +361,7 @@
+ # Deprecated group/name - [DEFAULT]/sql_connection
+ # Deprecated group/name - [DATABASE]/sql_connection
+ # Deprecated group/name - [sql]/connection
+-#connection = <None>
++connection = mysql+pymysql://glance:password@localhost/glancedb
+ 
+ # The SQLAlchemy connection string to use to connect to the slave
+ # database. (string value)
+@@ -767,7 +767,12 @@
+ #
+ 
+ # Complete public Identity API endpoint. (string value)
+-#auth_uri = <None>
++auth_uri = http://ops-mono-node:5000
++auth_url = http://ops-mono-node:35357
++auth_plugin = password
++project_name = service
++username = glance
++password = password
+ 
+ # API version of the admin Identity API endpoint. (string value)
+ #auth_version = <None>
+@@ -1246,7 +1251,7 @@
+ # service name removed. For example, if your paste section name is
+ # [pipeline:glance-api-keystone] use the value "keystone" (string
+ # value)
+-#flavor = <None>
++flavor = keystone
+ 
+ # Name of the paste configuration file. (string value)
+ #config_file = <None>

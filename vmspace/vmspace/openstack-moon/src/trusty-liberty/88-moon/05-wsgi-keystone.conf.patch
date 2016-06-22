@@ -1,0 +1,43 @@
+--- /etc/apache2/sites-available/wsgi-keystone.conf.bak	2016-05-18 12:32:30.564718598 +0000
++++ /etc/apache2/sites-available/wsgi-keystone.conf	2016-05-18 12:33:19.404716307 +0000
+@@ -4,7 +4,7 @@
+ <VirtualHost *:5000>
+     WSGIDaemonProcess keystone-public processes=5 threads=1 user=keystone group=keystone display-name=%{GROUP}
+     WSGIProcessGroup keystone-public
+-    WSGIScriptAlias / /usr/bin/keystone-wsgi-public
++    WSGIScriptAlias / /usr/local/bin/keystone-wsgi-public
+     WSGIApplicationGroup %{GLOBAL}
+     WSGIPassAuthorization On
+     <IfVersion >= 2.4>
+@@ -13,7 +13,7 @@
+     ErrorLog /var/log/apache2/keystone.log
+     CustomLog /var/log/apache2/keystone_access.log combined
+  
+-    <Directory /usr/bin>
++    <Directory /usr/local/bin>
+         <IfVersion >= 2.4>
+             Require all granted
+         </IfVersion>
+@@ -27,7 +27,7 @@
+ <VirtualHost *:35357>
+     WSGIDaemonProcess keystone-admin processes=5 threads=1 user=keystone group=keystone display-name=%{GROUP}
+     WSGIProcessGroup keystone-admin
+-    WSGIScriptAlias / /usr/bin/keystone-wsgi-admin
++    WSGIScriptAlias / /usr/local/bin/keystone-wsgi-admin
+     WSGIApplicationGroup %{GLOBAL}
+     WSGIPassAuthorization On
+     <IfVersion >= 2.4>
+@@ -36,7 +36,7 @@
+     ErrorLog /var/log/apache2/keystone.log
+     CustomLog /var/log/apache2/keystone_access.log combined
+  
+-    <Directory /usr/bin>
++    <Directory /usr/local/bin>
+         <IfVersion >= 2.4>
+             Require all granted
+         </IfVersion>
+@@ -47,3 +47,4 @@
+     </Directory>
+ </VirtualHost>
+ 
++

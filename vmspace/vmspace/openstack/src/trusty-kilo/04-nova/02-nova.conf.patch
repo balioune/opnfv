@@ -1,0 +1,23 @@
+--- /etc/nova/nova.conf.old     2015-09-09 08:42:48.272203572 +0000
++++ /etc/nova/nova.conf 2015-09-09 08:55:04.107342832 +0000
+@@ -14,3 +14,20 @@
+ api_paste_config=/etc/nova/api-paste.ini
+ volumes_path=/var/lib/nova/volumes
+ enabled_apis=ec2,osapi_compute,metadata
++
++glance_host=ops-mono-node
++auth_strategy = keystone
++my_ip = 192.168.33.30
++rabbit_host = ops-mono-node
++rabbit_password = password
++
++[database]
++connection = mysql://nova:password@localhost/novadb
++
++[keystone_authtoken]
++auth_host = ops-mono-node 
++auth_port = 35357
++auth_protocol = http
++admin_tenant_name = service
++admin_user = nova
++admin_password = password

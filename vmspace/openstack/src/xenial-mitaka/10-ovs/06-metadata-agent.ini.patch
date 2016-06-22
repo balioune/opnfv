@@ -1,0 +1,11 @@
+--- /etc/neutron/metadata_agent.ini.bak	2016-06-07 06:37:56.447769091 -0400
++++ /etc/neutron/metadata_agent.ini	2016-06-07 06:39:37.566303092 -0400
+@@ -11,6 +11,8 @@
+ project_name = service
+ username = neutron
+ password = password
++project_domain_id = default
++user_domain_id = default
+ 
+ # Location for Metadata Proxy UNIX domain socket. (string value)
+ #metadata_proxy_socket = $state_path/metadata_proxy

@@ -1,0 +1,11 @@
+--- /etc/neutron/l3_agent.ini.old       2015-09-09 12:42:44.793091266 +0000
++++ /etc/neutron/l3_agent.ini   2015-09-09 12:43:40.436896511 +0000
+@@ -4,7 +4,7 @@
+ 
+ # L3 requires that an interface driver be set. Choose the one that best
+ # matches your plugin.
+-# interface_driver =
++interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver
+ 
+ # Example of interface_driver option for OVS based plugins (OVS, Ryu, NEC)
+ # that supports L3 agent

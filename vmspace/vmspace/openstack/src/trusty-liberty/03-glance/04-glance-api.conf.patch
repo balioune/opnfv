@@ -1,0 +1,79 @@
+--- /etc/glance/glance-api.conf.old	2016-01-12 13:15:54.000000000 +0000
++++ /etc/glance/glance-api.conf	2016-04-04 12:12:00.201232738 +0000
+@@ -360,7 +360,7 @@
+ # default. (boolean value)
+ # This option is deprecated for removal.
+ # Its value may be silently ignored in the future.
+-#verbose = true
++verbose = true
+ 
+ # The name of a logging configuration file. This file is appended to
+ # any existing logging configuration files. For details about logging
+@@ -488,7 +488,7 @@
+ 
+ # The Drivers(s) to handle sending notifications. Possible values are
+ # messaging, messagingv2, routing, log, test, noop (multi valued)
+-#notification_driver =
++notification_driver = noop
+ 
+ # AMQP topic used for OpenStack notifications. (list value)
+ # Deprecated group/name - [rpc_notifier2]/topics
+@@ -535,7 +535,7 @@
+ # Deprecated group/name - [DEFAULT]/sql_connection
+ # Deprecated group/name - [DATABASE]/sql_connection
+ # Deprecated group/name - [sql]/connection
+-#connection = <None>
++connection = mysql+pymysql://glance:password@localhost/glancedb
+ 
+ # The SQLAlchemy connection string to use to connect to the slave
+ # database. (string value)
+@@ -639,7 +639,7 @@
+ # Default scheme to use to store image data. The scheme must be
+ # registered by one of the stores defined by the 'stores' config
+ # option. (string value)
+-#default_store = file
++default_store = file
+ 
+ # Minimum interval seconds to execute updating dynamic storage
+ # capabilities based on backend status then. It's not a periodic
+@@ -698,7 +698,7 @@
+ 
+ # Directory to which the Filesystem backend store writes images.
+ # (string value)
+-#filesystem_store_datadir = <None>
++filesystem_store_datadir = /var/lib/glance/images/
+ 
+ # List of directories and its priorities to which the Filesystem
+ # backend store writes images. (multi valued)
+@@ -977,7 +977,12 @@
+ #
+ 
+ # Complete public Identity API endpoint. (string value)
+-#auth_uri = <None>
++auth_uri = http://ops-mono-node:5000
++auth_url = http://ops-mono-node:35357
++auth_plugin = password
++project_name = service
++username = glance
++password = password
+ 
+ # API version of the admin Identity API endpoint. (string value)
+ #auth_version = <None>
+@@ -1014,7 +1019,7 @@
+ #insecure = false
+ 
+ # The region in which the identity server can be found. (string value)
+-#region_name = <None>
++region_name = Orange
+ 
+ # Directory used to cache files related to PKI tokens. (string value)
+ #signing_dir = <None>
+@@ -1474,7 +1479,7 @@
+ # service name removed. For example, if your paste section name is
+ # [pipeline:glance-api-keystone] use the value "keystone" (string
+ # value)
+-#flavor = <None>
++flavor = keystone
+ 
+ # Name of the paste configuration file. (string value)
+ #config_file = <None>

@@ -1,0 +1,68 @@
+--- /etc/glance/glance-api.conf.old     2015-09-08 17:44:09.920331967 +0000
++++ /etc/glance/glance-api.conf 2015-09-08 20:19:42.704999098 +0000
+@@ -1,6 +1,6 @@
+ [DEFAULT]
+ # Show more verbose log output (sets INFO log level output)
+-#verbose = False
++verbose = True
+ 
+ # Show debugging output in logs (sets DEBUG log level output)
+ #debug = False
+@@ -21,7 +21,7 @@
+ #      glance.store.cinder.Store,
+ #      glance.store.gridfs.Store,
+ #      glance.store.vmware_datastore.Store,
+-#known_stores = glance.store.filesystem.Store,
++known_stores = glance.store.filesystem.Store,
+ #               glance.store.http.Store
+ 
+ 
+@@ -241,11 +241,11 @@
+ 
+ # Configuration options if sending notifications via rabbitmq (these are
+ # the defaults)
+-rabbit_host = localhost
++rabbit_host = ops-mono-node
+ rabbit_port = 5672
+ rabbit_use_ssl = false
+ rabbit_userid = guest
+-rabbit_password = guest
++rabbit_password = password
+ rabbit_virtual_host = /
+ rabbit_notification_exchange = glance
+ rabbit_notification_topic = notifications
+@@ -563,7 +563,7 @@
+ # Deprecated group/name - [DEFAULT]/sql_connection
+ # Deprecated group/name - [DATABASE]/sql_connection
+ # Deprecated group/name - [sql]/connection
+-#connection = <None>
++connection = mysql://glance:password@ops-mono-node/glancedb
+ 
+ # The SQL mode to be used for MySQL sessions. This option,
+ # including the default, overrides any server-set SQL mode. To
+@@ -644,12 +644,12 @@
+ #db_max_retries = 20
+ 
+ [keystone_authtoken]
+-auth_host = 127.0.0.1
++auth_host = ops-mono-node
+ auth_port = 35357
+ auth_protocol = http
+-admin_tenant_name = %SERVICE_TENANT_NAME%
+-admin_user = %SERVICE_USER%
+-admin_password = %SERVICE_PASSWORD%
++admin_tenant_name = service
++admin_user = glance
++admin_password = password
+ 
+ [paste_deploy]
+ # Name of the paste configuration file that defines the available pipelines
+@@ -659,7 +659,7 @@
+ # service name removed. For example, if your paste section name is
+ # [pipeline:glance-api-keystone], you would configure the flavor below
+ # as 'keystone'.
+-#flavor=
++flavor=keystone+caching
+ 
+ [store_type_location_strategy]
+ # The scheme list to use to get store preference order. The scheme must be

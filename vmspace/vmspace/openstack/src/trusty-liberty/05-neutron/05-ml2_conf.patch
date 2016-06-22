@@ -1,0 +1,50 @@
+--- /etc/neutron/plugins/ml2/ml2_conf.ini.old	2016-04-04 14:59:49.677241850 +0000
++++ /etc/neutron/plugins/ml2/ml2_conf.ini	2016-04-04 15:04:09.041242085 +0000
+@@ -2,20 +2,20 @@
+ # (ListOpt) List of network type driver entrypoints to be loaded from
+ # the neutron.ml2.type_drivers namespace.
+ #
+-# type_drivers = local,flat,vlan,gre,vxlan,geneve
++type_drivers = flat,vlan
+ # Example: type_drivers = flat,vlan,gre,vxlan,geneve
+ 
+ # (ListOpt) Ordered list of network_types to allocate as tenant
+ # networks. The default value 'local' is useful for single-box testing
+ # but provides no connectivity between hosts.
+ #
+-# tenant_network_types = local
++tenant_network_types = 
+ # Example: tenant_network_types = vlan,gre,vxlan,geneve
+ 
+ 
+ # (ListOpt) Ordered list of networking mechanism driver entrypoints
+ # to be loaded from the neutron.ml2.mechanism_drivers namespace.
+-# mechanism_drivers =
++mechanism_drivers = linuxbridge
+ # Example: mechanism_drivers = openvswitch,mlnx
+ # Example: mechanism_drivers = arista
+ # Example: mechanism_drivers = openvswitch,cisco_nexus,logger
+@@ -24,7 +24,7 @@
+ 
+ # (ListOpt) Ordered list of extension driver entrypoints
+ # to be loaded from the neutron.ml2.extension_drivers namespace.
+-# extension_drivers =
++extension_drivers = port_security
+ # Example: extension_drivers = anewextensiondriver
+ 
+ # =========== items for MTU selection and advertisement =============
+@@ -64,7 +64,7 @@
+ # can be created. Use * to allow flat networks with arbitrary
+ # physical_network names.
+ #
+-# flat_networks =
++flat_networks = public
+ # Example:flat_networks = physnet1,physnet2
+ # Example:flat_networks = *
+ 
+@@ -117,4 +117,4 @@
+ 
+ # Use ipset to speed-up the iptables security groups. Enabling ipset support
+ # requires that ipset is installed on L2 agent node.
+-# enable_ipset = True
++enable_ipset = True

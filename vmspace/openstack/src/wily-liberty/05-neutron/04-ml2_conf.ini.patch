@@ -1,0 +1,45 @@
+--- /etc/neutron/plugins/ml2/ml2_conf.ini.old	2016-03-24 09:58:09.514980797 +0000
++++ /etc/neutron/plugins/ml2/ml2_conf.ini	2016-03-25 15:35:31.634881694 +0000
+@@ -2,20 +2,20 @@
+ # (ListOpt) List of network type driver entrypoints to be loaded from
+ # the neutron.ml2.type_drivers namespace.
+ #
+-# type_drivers = local,flat,vlan,gre,vxlan,geneve
++type_drivers = gre,flat
+ # Example: type_drivers = flat,vlan,gre,vxlan,geneve
+ 
+ # (ListOpt) Ordered list of network_types to allocate as tenant
+ # networks. The default value 'local' is useful for single-box testing
+ # but provides no connectivity between hosts.
+ #
+-# tenant_network_types = local
++tenant_network_types = gre,flat
+ # Example: tenant_network_types = vlan,gre,vxlan,geneve
+ 
+ 
+ # (ListOpt) Ordered list of networking mechanism driver entrypoints
+ # to be loaded from the neutron.ml2.mechanism_drivers namespace.
+-# mechanism_drivers =
++mechanism_drivers = openvswitch
+ # Example: mechanism_drivers = openvswitch,mlnx
+ # Example: mechanism_drivers = arista
+ # Example: mechanism_drivers = openvswitch,cisco_nexus,logger
+@@ -79,7 +79,7 @@
+ 
+ [ml2_type_gre]
+ # (ListOpt) Comma-separated list of <tun_min>:<tun_max> tuples enumerating ranges of GRE tunnel IDs that are available for tenant network allocation
+-tunnel_id_ranges = 1:100
++tunnel_id_ranges = 1:1000
+ 
+ [ml2_type_vxlan]
+ # (ListOpt) Comma-separated list of <vni_min>:<vni_max> tuples enumerating
+@@ -118,3 +118,9 @@
+ # Use ipset to speed-up the iptables security groups. Enabling ipset support
+ # requires that ipset is installed on L2 agent node.
+ # enable_ipset = True
++
++[ovs]
++local_ip= 192.168.33.30
++tunnel_type= gre
++enable_tunneling = True
++bridge_mappings = physnet1:br-ex

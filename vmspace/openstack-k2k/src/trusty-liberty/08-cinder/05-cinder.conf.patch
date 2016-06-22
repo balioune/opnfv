@@ -1,0 +1,35 @@
+--- /etc/cinder/cinder.conf.old	2016-01-07 11:58:05.000000000 +0000
++++ /etc/cinder/cinder.conf	2016-04-05 14:41:44.946067293 +0000
+@@ -9,3 +9,32 @@
+ state_path = /var/lib/cinder
+ lock_path = /var/lock/cinder
+ volumes_dir = /var/lib/cinder/volumes
++rpc_backend = rabbit
++my_ip = 192.168.33.30
++enabled_backends = lvm
++glance_host = ops-mono-node
++
++[database]
++connection = mysql+pymysql://cinder:password@localhost/cinderdb
++
++[oslo_messaging_rabbit]
++rabbit_host = ops-mono-node
++rabbit_userid = openstack
++rabbit_password = password
++
++[oslo_concurrency]
++lock_path = /var/lib/cinder/tmp
++
++[keystone_authtoken]
++auth_uri = http://ops-mono-node:5000
++auth_url = http://ops-mono-node:35357
++auth_plugin = password
++project_name = service
++username = cinder
++password = password
++
++[lvm]
++volume_driver = cinder.volume.drivers.lvm.LVMVolumeDriver
++volume_group = cinder-volumes
++iscsi_protocol = iscsi
++iscsi_helper = tgtadm

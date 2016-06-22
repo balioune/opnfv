@@ -1,0 +1,21 @@
+--- /etc/cinder/cinder.conf.old	2015-09-09 22:16:03.808017559 +0000
++++ /etc/cinder/cinder.conf	2015-09-10 08:31:57.607096914 +0000
+@@ -9,3 +9,18 @@
+ state_path = /var/lib/cinder
+ lock_path = /var/lock/cinder
+ volumes_dir = /var/lib/cinder/volumes
++rabbit_host = ops-mono-node
++rabbit_user = guest
++rabbit_password = password
++volume_clear = none
++
++[database]
++connection = mysql://cinder:password@localhost/cinderdb
++
++[keystone_authtoken]
++auth_host = ops-mono-node
++auth_port = 35357
++auth_protocol = http
++admin_tenant_name = service
++admin_user = cinder 
++admin_password = password

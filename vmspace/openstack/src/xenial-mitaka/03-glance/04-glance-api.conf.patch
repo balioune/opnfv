@@ -1,0 +1,79 @@
+--- /etc/glance/glance-api.conf.orig	2016-04-13 16:29:00.000000000 -0400
++++ /etc/glance/glance-api.conf	2016-05-26 05:13:01.193498000 -0400
+@@ -381,7 +381,7 @@
+ # the default INFO level. (boolean value)
+ # This option is deprecated for removal.
+ # Its value may be silently ignored in the future.
+-#verbose = true
++verbose = true
+ 
+ # The name of a logging configuration file. This file is appended to
+ # any existing logging configuration files. For details about logging
+@@ -638,7 +638,7 @@
+ # Deprecated group/name - [DEFAULT]/sql_connection
+ # Deprecated group/name - [DATABASE]/sql_connection
+ # Deprecated group/name - [sql]/connection
+-#connection = <None>
++connection = mysql+pymysql://glance:password@localhost/glancedb
+ 
+ # The SQLAlchemy connection string to use to connect to the slave
+ # database. (string value)
+@@ -743,7 +743,7 @@
+ # Default scheme to use to store image data. The scheme must be
+ # registered by one of the stores defined by the 'stores' config
+ # option. (string value)
+-#default_store = file
++default_store = file
+ 
+ # Minimum interval seconds to execute updating dynamic storage
+ # capabilities based on backend status then. It's not a periodic
+@@ -1022,7 +1022,7 @@
+ 
+ # Directory to which the Filesystem backend store writes images.
+ # (string value)
+-#filesystem_store_datadir = /var/lib/glance/images
++filesystem_store_datadir = /var/lib/glance/images/
+ 
+ # List of directories and its priorities to which the Filesystem
+ # backend store writes images. (multi valued)
+@@ -1115,7 +1115,12 @@
+ #
+ 
+ # Complete public Identity API endpoint. (string value)
+-#auth_uri = <None>
++auth_uri = http://ops-mono-node:5000
++auth_url = http://ops-mono-node:35357
++auth_plugin = password
++project_name = service
++username = glance
++password = password
+ 
+ # API version of the admin Identity API endpoint. (string value)
+ #auth_version = <None>
+@@ -1152,7 +1157,7 @@
+ #insecure = false
+ 
+ # The region in which the identity server can be found. (string value)
+-#region_name = <None>
++region_name = Orange
+ 
+ # Directory used to cache files related to PKI tokens. (string value)
+ #signing_dir = <None>
+@@ -1387,7 +1392,7 @@
+ # The Drivers(s) to handle sending notifications. Possible values are
+ # messaging, messagingv2, routing, log, test, noop (multi valued)
+ # Deprecated group/name - [DEFAULT]/notification_driver
+-#driver =
++driver = noop
+ 
+ # A URL representing the messaging driver to use for notifications. If
+ # not set, we fall back to the same configuration used for RPC.
+@@ -1683,7 +1688,7 @@
+ # service name removed. For example, if your paste section name is
+ # [pipeline:glance-api-keystone] use the value "keystone" (string
+ # value)
+-#flavor = <None>
++flavor = keystone
+ 
+ # Name of the paste configuration file. (string value)
+ #config_file = <None>

@@ -1,0 +1,39 @@
+--- /etc/neutron/plugins/ml2/linuxbridge_agent.ini.old	2016-04-04 15:06:19.197242203 +0000
++++ /etc/neutron/plugins/ml2/linuxbridge_agent.ini	2016-04-04 15:11:56.837242508 +0000
+@@ -6,14 +6,14 @@
+ # networks listed in network_vlan_ranges on the server should have
+ # mappings to appropriate interfaces on each agent.
+ #
+-# physical_interface_mappings =
++physical_interface_mappings = public:eth1
+ # Example: physical_interface_mappings = physnet1:eth1
+ 
+ [vxlan]
+ # (BoolOpt) enable VXLAN on the agent
+ # VXLAN support can be enabled when agent is managed by ml2 plugin using
+ # linuxbridge mechanism driver.
+-# enable_vxlan = True
++enable_vxlan = False
+ #
+ # (IntOpt) use specific TTL for vxlan interface protocol packets
+ # ttl =
+@@ -41,6 +41,7 @@
+ # l2_population = False
+ 
+ [agent]
++prevent_arp_spoofing = True
+ # Agent's polling interval in seconds
+ # polling_interval = 2
+ 
+@@ -51,9 +52,9 @@
+ 
+ [securitygroup]
+ # Firewall driver for realizing neutron security group function
+-# firewall_driver = neutron.agent.firewall.NoopFirewallDriver
++firewall_driver = neutron.agent.linux.iptables_firewall.IptablesFirewallDriver
+ # Example: firewall_driver = neutron.agent.linux.iptables_firewall.IptablesFirewallDriver
+ 
+ # Controls if neutron security group is enabled or not.
+ # It should be false when you use nova security group.
+-# enable_security_group = True
++enable_security_group = True

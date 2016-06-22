@@ -1,0 +1,53 @@
+--- /etc/neutron/plugins/ml2/ml2_conf.ini.old	2015-09-09 10:46:46.495010957 +0000
++++ /etc/neutron/plugins/ml2/ml2_conf.ini	2015-09-09 13:04:46.894576792 +0000
+@@ -2,19 +2,19 @@
+ # (ListOpt) List of network type driver entrypoints to be loaded from
+ # the neutron.ml2.type_drivers namespace.
+ #
+-# type_drivers = local,flat,vlan,gre,vxlan
++type_drivers = gre,flat
+ # Example: type_drivers = flat,vlan,gre,vxlan
+ 
+ # (ListOpt) Ordered list of network_types to allocate as tenant
+ # networks. The default value 'local' is useful for single-box testing
+ # but provides no connectivity between hosts.
+ #
+-# tenant_network_types = local
++tenant_network_types = gre
+ # Example: tenant_network_types = vlan,gre,vxlan
+ 
+ # (ListOpt) Ordered list of networking mechanism driver entrypoints
+ # to be loaded from the neutron.ml2.mechanism_drivers namespace.
+-# mechanism_drivers =
++mechanism_drivers = openvswitch
+ # Example: mechanism_drivers = openvswitch,mlnx
+ # Example: mechanism_drivers = arista
+ # Example: mechanism_drivers = cisco,logger
+@@ -26,7 +26,7 @@
+ # can be created. Use * to allow flat networks with arbitrary
+ # physical_network names.
+ #
+-# flat_networks =
++flat_networks = physnet1
+ # Example:flat_networks = physnet1,physnet2
+ # Example:flat_networks = *
+ 
+@@ -41,7 +41,7 @@
+ 
+ [ml2_type_gre]
+ # (ListOpt) Comma-separated list of <tun_min>:<tun_max> tuples enumerating ranges of GRE tunnel IDs that are available for tenant network allocation
+-# tunnel_id_ranges =
++tunnel_id_ranges = 1:100
+ 
+ [ml2_type_vxlan]
+ # (ListOpt) Comma-separated list of <vni_min>:<vni_max> tuples enumerating
+@@ -60,3 +60,9 @@
+ # Controls if neutron security group is enabled or not.
+ # It should be false when you use nova security group.
+ # enable_security_group = True
++
++[ovs]
++local_ip= 192.168.33.30
++tunnel_type= gre
++enable_tunneling = True
++bridge_mappings = physnet1:br-ex

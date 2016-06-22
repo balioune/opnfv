@@ -1,0 +1,23 @@
+--- /etc/neutron/metadata_agent.ini.old	2015-09-09 12:54:37.797581958 +0000
++++ /etc/neutron/metadata_agent.ini	2015-09-09 12:56:55.224827149 +0000
+@@ -3,15 +3,15 @@
+ # debug = True
+ 
+ # The Neutron user information for accessing the Neutron API.
+-auth_url = http://localhost:5000/v2.0
+-auth_region = RegionOne
++auth_url = http://ops-mono-node:5000/v2.0
++auth_region = Orange
+ # Turn off verification of the certificate for ssl
+ # auth_insecure = False
+ # Certificate Authority public key (CA cert) file for ssl
+ # auth_ca_cert =
+-admin_tenant_name = %SERVICE_TENANT_NAME%
+-admin_user = %SERVICE_USER%
+-admin_password = %SERVICE_PASSWORD%
++admin_tenant_name = service
++admin_user = neutron
++admin_password = password
+ 
+ # Network service endpoint type to pull from the keystone catalog
+ # endpoint_type = adminURL

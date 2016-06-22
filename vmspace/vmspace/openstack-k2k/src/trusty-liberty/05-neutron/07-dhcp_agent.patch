@@ -1,0 +1,37 @@
+--- /etc/neutron/dhcp_agent.ini.old	2016-04-04 15:12:57.769242564 +0000
++++ /etc/neutron/dhcp_agent.ini	2016-04-04 15:18:05.249242842 +0000
+@@ -1,6 +1,7 @@
+ [DEFAULT]
+ # Show debugging output in log (sets DEBUG log level output)
+ # debug = False
++verbose = True
+ 
+ # The DHCP agent will resync its state with Neutron to recover from any
+ # transient notification or rpc errors. The interval is number of
+@@ -9,7 +10,7 @@
+ 
+ # The DHCP agent requires an interface driver be set. Choose the one that best
+ # matches your plugin.
+-# interface_driver =
++interface_driver = neutron.agent.linux.interface.BridgeInterfaceDriver
+ 
+ # Example of interface_driver option for OVS based plugins(OVS, Ryu, NEC, NVP,
+ # BigSwitch/Floodlight)
+@@ -28,7 +29,7 @@
+ 
+ # The agent can use other DHCP drivers.  Dnsmasq is the simplest and requires
+ # no additional setup of the DHCP server.
+-# dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
++dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
+ 
+ # Allow overlapping IP (Must have kernel build with CONFIG_NET_NS=y and
+ # iproute2 package that supports namespaces). This option is deprecated and
+@@ -49,7 +50,7 @@
+ # be activated when the subnet does not contain any router port. The guest
+ # instance must be configured to request host routes via DHCP (Option 121).
+ # This option doesn't have any effect when force_metadata is set to True.
+-# enable_isolated_metadata = False
++enable_isolated_metadata = True
+ 
+ # Allows for serving metadata requests coming from a dedicated metadata
+ # access network whose cidr is 169.254.169.254/16 (or larger prefix), and

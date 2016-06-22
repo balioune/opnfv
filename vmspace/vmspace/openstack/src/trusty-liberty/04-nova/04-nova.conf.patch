@@ -1,0 +1,43 @@
+--- /etc/nova/nova.conf.old	2016-01-21 18:13:33.000000000 +0000
++++ /etc/nova/nova.conf	2016-04-04 13:20:33.225236460 +0000
+@@ -9,4 +9,39 @@
+ verbose=True
+ ec2_private_dns_show_ip=True
+ api_paste_config=/etc/nova/api-paste.ini
+-enabled_apis=ec2,osapi_compute,metadata
++enabled_apis=osapi_compute,metadata
++rpc_backend = rabbit
++auth_strategy = keystone
++my_ip = 192.168.33.30
++network_api_class = nova.network.neutronv2.api.API
++security_group_api = neutron
++linuxnet_interface_driver = nova.network.linux_net.NeutronLinuxBridgeInterfaceDriver
++firewall_driver = nova.virt.firewall.NoopFirewallDriver
++
++[database]
++connection = mysql+pymysql://nova:password@localhost/novadb
++
++[oslo_messaging_rabbit]
++rabbit_host = ops-mono-node
++rabbit_userid = openstack
++rabbit_password = password
++
++[keystone_authtoken]
++auth_uri = http://ops-mono-node:5000
++auth_url = http://ops-mono-node:35357
++auth_plugin = password
++project_name = service
++username = nova
++password = password
++
++[vnc]
++enabled = True
++vncserver_listen = $my_ip
++vncserver_proxyclient_address = $my_ip
++novncproxy_base_url = http://ops-mono-node:6080/vnc_auto.html
++
++[glance]
++host = ops-mono-node
++
++[oslo_concurrency]
++lock_path = /var/lib/nova/tmp

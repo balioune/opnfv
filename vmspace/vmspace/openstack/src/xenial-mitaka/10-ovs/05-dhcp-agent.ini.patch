@@ -1,0 +1,37 @@
+--- /etc/neutron/dhcp_agent.ini.bak	2016-06-07 06:35:04.105641091 -0400
++++ /etc/neutron/dhcp_agent.ini	2016-06-07 06:36:51.583353091 -0400
+@@ -11,6 +11,7 @@
+ # support (e.g. RHEL 6.5) so long as ovs_use_veth is set to True. (boolean
+ # value)
+ #ovs_use_veth = false
++ovs_use_veth = false
+ 
+ # MTU setting for device. This option will be removed in Newton. Please use the
+ # system-wide segment_mtu setting which the agents will take into account when
+@@ -20,7 +21,8 @@
+ #network_device_mtu = <None>
+ 
+ # The driver used to manage the virtual interface. (string value)
+-interface_driver = neutron.agent.linux.interface.BridgeInterfaceDriver
++#interface_driver = neutron.agent.linux.interface.BridgeInterfaceDriver
++interface_driver = openvswitch
+ 
+ # Timeout in seconds for ovs-vsctl commands. If the timeout expires, ovs
+ # commands will fail with ALARMCLOCK error. (integer value)
+@@ -36,7 +38,7 @@
+ #resync_interval = 5
+ 
+ # The driver used to manage the DHCP server. (string value)
+-dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
++#dhcp_driver = neutron.agent.linux.dhcp.Dnsmasq
+ 
+ # The DHCP server can assist with providing metadata support on isolated
+ # networks. Setting this value to True will cause the DHCP server to append
+@@ -109,6 +111,7 @@
+ # If set to true, the logging level will be set to DEBUG instead of the default
+ # INFO level. (boolean value)
+ #debug = false
++debug = true
+ 
+ # If set to false, the logging level will be set to WARNING instead of the
+ # default INFO level. (boolean value)

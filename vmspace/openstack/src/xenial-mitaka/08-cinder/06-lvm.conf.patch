@@ -1,0 +1,10 @@
+--- /etc/lvm/lvm.conf.orig	2016-05-27 05:46:42.521467115 -0400
++++ /etc/lvm/lvm.conf	2016-05-27 05:48:25.336849115 -0400
+@@ -136,6 +136,7 @@
+ 	# filter = [ "a|loop|", "r|/dev/hdc|", "a|/dev/ide|", "r|.*|" ]
+ 	# Use anchors to be very specific:
+ 	# filter = [ "a|^/dev/hda8$|", "r|.*/|" ]
++	filter = [ "a/sdb/", "r/.*/"]
+ 	# 
+ 	# This configuration option has an automatic default value.
+ 	# filter = [ "a|.*/|" ]

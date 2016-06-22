@@ -1,0 +1,8 @@
+--- /etc/nova/nova-compute.conf.old	2015-09-09 15:23:30.118164659 +0000
++++ /etc/nova/nova-compute.conf	2015-09-09 15:23:56.918163332 +0000
+@@ -1,4 +1,4 @@
+ [DEFAULT]
+ compute_driver=libvirt.LibvirtDriver
+ [libvirt]
+-virt_type=kvm
++virt_type=qemu

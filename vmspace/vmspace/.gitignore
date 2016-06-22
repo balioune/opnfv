@@ -1,0 +1,41 @@
+# Do not index rst2pdf result:
+*.pdf
+# Do not integrte Devstack download
+devstack/devstack/
+# Else:
+*.pyc
+*.box
+*.ova
+*.sw?
+*.egg/
+vendor
+.ksl-venv
+.venv
+.update-venv/
+.tox
+*.log
+.coverage
+coverage.xml
+cover/*
+covhtml
+pep8.txt
+nosetests.xml
+.DS_Store
+ChangeLog
+AUTHORS
+.project
+.pydevproject
+.testrepository/
+*.db
+.idea/
+_image/
+*/.vagrant
+*/*/.vagrant
+*/*/*/.vagrant
+*/*/*/*/.vagrant
+*/*/*/*/.bak
+*~
+*.pcap
+*.crt
+*.pkt
+_tmp

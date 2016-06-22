@@ -1,0 +1,11 @@
+--- /etc/nova/nova.conf.odl	2016-05-24 09:16:43.800309792 +0000
++++ /etc/nova/nova.conf	2016-05-24 09:17:40.840817151 +0000
+@@ -15,7 +15,7 @@
+ my_ip = 192.168.33.30
+ network_api_class = nova.network.neutronv2.api.API
+ security_group_api = neutron
+-linuxnet_interface_driver = nova.network.linux_net.NeutronLinuxBridgeInterfaceDriver
++linuxnet_interface_driver = 
+ firewall_driver = nova.virt.firewall.NoopFirewallDriver
+ 
+ [database]

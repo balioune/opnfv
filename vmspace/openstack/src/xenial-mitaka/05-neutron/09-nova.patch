@@ -1,0 +1,19 @@
+--- /etc/nova/nova.conf.old	2016-04-04 13:20:33.225236460 +0000
++++ /etc/nova/nova.conf	2016-04-06 12:07:48.502818738 +0000
+@@ -45,3 +45,15 @@
+ 
+ [oslo_concurrency]
+ lock_path = /var/lib/nova/tmp
++
++[neutron]
++url = http://ops-mono-node:9696
++auth_url = http://ops-mono-node:35357
++auth_uri = http://ops-mono-node:5000
++auth_type = password
++region_name = Orange
++project_name = service
++username = neutron
++password = password
++service_metadata_proxy = True
++metadata_proxy_shared_secret = password
++connection = mysql+pymysql://neutron:password@localhost/neutrondb

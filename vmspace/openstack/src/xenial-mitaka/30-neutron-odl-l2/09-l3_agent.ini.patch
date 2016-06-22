@@ -1,0 +1,4 @@
+23c23
+< #interface_driver = <None>
+---
+> interface_driver = neutron.agent.linux.interface.OVSInterfaceDriver

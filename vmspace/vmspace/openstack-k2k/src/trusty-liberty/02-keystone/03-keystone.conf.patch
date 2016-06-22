@@ -1,0 +1,62 @@
+--- /etc/keystone/keystone.conf.old	2016-04-01 11:18:10.997277350 +0000
++++ /etc/keystone/keystone.conf	2016-04-01 11:31:56.049273977 +0000
+@@ -9,7 +9,7 @@
+ # production (highly recommended), remove AdminTokenAuthMiddleware from your
+ # paste application pipelines (for example, in keystone-paste.ini). (string
+ # value)
+-#admin_token = ADMIN
++admin_token = password
+ 
+ # The base public endpoint URL for Keystone that is advertised to clients
+ # (NOTE: this does NOT affect how Keystone listens for connections). Defaults
+@@ -104,7 +104,7 @@
+ # (boolean value)
+ # This option is deprecated for removal.
+ # Its value may be silently ignored in the future.
+-#verbose = true
++verbose = true
+ 
+ # The name of a logging configuration file. This file is appended to any
+ # existing logging configuration files. For details about logging configuration
+@@ -351,7 +351,7 @@
+ 
+ # Memcache servers in the format of "host:port". (dogpile.cache.memcache and
+ # keystone.cache.memcache_pool backends only). (list value)
+-#memcache_servers = localhost:11211
++memcache_servers = localhost:11211
+ 
+ # Number of seconds memcached server is considered dead before it is tried
+ # again. (dogpile.cache.memcache and keystone.cache.memcache_pool backends
+@@ -494,7 +494,7 @@
+ # Deprecated group/name - [DATABASE]/sql_connection
+ # Deprecated group/name - [sql]/connection
+ #connection = <None>
+-connection = sqlite:////var/lib/keystone/keystone.db
++connection = mysql+pymysql://keystone:password@ops-mono-node/keystonedb 
+ 
+ # The SQLAlchemy connection string to use to connect to the slave database.
+ # (string value)
+@@ -1717,7 +1717,7 @@
+ # Entrypoint for an implementation of the backend for persisting revocation
+ # events in the keystone.revoke namespace. Supplied drivers are kvs and sql.
+ # (string value)
+-#driver = sql
++driver = sql
+ 
+ # This value (calculated in seconds) is added to token expiration before a
+ # revocation event may be removed from the backend. (integer value)
+@@ -1910,12 +1910,12 @@
+ # Controls the token construction, validation, and revocation operations.
+ # Entrypoint in the keystone.token.provider namespace. Core providers are
+ # [fernet|pkiz|pki|uuid]. (string value)
+-#provider = uuid
++provider = uuid
+ 
+ # Entrypoint for the token persistence backend driver in the
+ # keystone.token.persistence namespace. Supplied drivers are kvs, memcache,
+ # memcache_pool, and sql. (string value)
+-#driver = sql
++driver = memcache
+ 
+ # Toggle for token system caching. This has no effect unless global caching is
+ # enabled. (boolean value)

@@ -1,0 +1,18 @@
+# laucnch ODL
+cd /home/vagrant/controller/karaf/opendaylight-karaf/target/assembly/bin/
+./karaf debug
+
+# list installed bundles
+bundle:list
+
+#install AAA from the Karaf shell
+repo-add mvn:org.opendaylight.aaa/features-aaa/0.2.3-SNAPSHOT/xml/features
+feature:install odl-aaa-authn
+
+#authentication
+curl -s -d 'grant_type=password&username=admin&password=admin&scope=sdn' http://127.0.0.1:8080/oauth2/token
+
+
+
+
+
